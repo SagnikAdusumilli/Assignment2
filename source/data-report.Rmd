@@ -1,0 +1,84 @@
+---
+title: "main"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#import packages;
+library(dplyr)
+library(reshape2)
+library(ggplot2)
+library(Hmisc)
+library(corrplot)
+library(mice)
+library(VIM)
+library(pROC)
+library(caret)
+library(sqldf)
+```
+
+## Abstract
+
+TBD
+
+## Background 
+TBD
+
+
+
+## Objective
+TBD
+
+# Data Analysis
+Source of data: [Moro et al., 2014] S. Moro, P. Cortez and P. Rita. A Data-Driven Approach to Predict the Success of Bank Telemarketing. Decision Support Systems, Elsevier, 62:22-31, June 2014
+
+Extracted from https://archive.ics.uci.edu/ml/datasets/Bank+Marketing#
+
+
+
+## Data Dictionary
+Datat set is comprised of database of contributions made at both the federal level and in 13 provinces and territories.
+
+Column Name            | Column Description  
+-----------------------| ------------------- 
+age                    | Age of the customer
+job                    | Customer's Occupation*
+marital                | Marital status of the customer* 
+education              | Education level of the customer*
+default                | Has credit in default (yes/no)
+balance                | ??
+housing                | has housing loan (yes/no)
+loan                   | has personal loan (yes/no)  
+contract               | contact communication type (categorical: 'cellular','telephone') 
+day                    | ??
+month                  | month the customer was contrained previously in the year
+duration               |  last contact duration, in seconds (numeric). Important note: this attribute highly affects the output target (e.g., if duration=0 then                             y='no'). Yet, the duration is not known before a call is performed. Also, after the end of the call y is obviously 
+campaign               |  number of contacts performed during this campaign and for this client (numeric, includes last contact)
+pdays                  | number of days that passed by after the client was last contacted from a previous campaign (numeric; 999 means client was not previously                           contacted)
+previous               | number of contacts performed before this campaign and for this client
+poutcome               | outcome of the previous marketing campaign
+y                      | has the client subscribed a term deposit? (binary: 'yes','no')
+
+## Data Exploartion
+```{r}
+bankData = read.csv("../Data/bank.csv", header = TRUE, na.strings =  c("NA","","#NA"), sep=";")
+```
+
+
+## Missing Data
+
+## Insights from Data explorations
+
+## Data Preparation
+
+## Data Imputing
+
+## Feature Selection
+
+## Modeling
+
+You can also embed plots, for example:
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
