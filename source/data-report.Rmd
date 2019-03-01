@@ -19,8 +19,8 @@ library(sqldf)
 ```
 
 ## Abstract
-
-TBD
+Nowadays, telecom industry faces fierce com-petition in satisfying its customers. The role of churn prediction system is not only restricted to accurately predict churners but also to interpret customer churn behavior.
+TBD: What is churn behaviour
 
 ## Background 
 TBD
@@ -31,9 +31,7 @@ TBD
 TBD
 
 # Data Analysis
-Source of data: [Moro et al., 2014] S. Moro, P. Cortez and P. Rita. A Data-Driven Approach to Predict the Success of Bank Telemarketing. Decision Support Systems, Elsevier, 62:22-31, June 2014
-
-Extracted from https://archive.ics.uci.edu/ml/datasets/Bank+Marketing#
+Source of data: https://www.kaggle.com/jpacse/datasets-for-churn-telecom
 
 
 
@@ -62,10 +60,19 @@ y                      | has the client subscribed a term deposit? (binary: 'yes
 
 ## Data Exploartion
 ```{r}
-bankData = read.csv("../Data/bank.csv", header = TRUE, na.strings =  c("NA","","#NA"), sep=";")
+telecomData = read.csv("../data/cell2celltrain.csv", header = TRUE, na.strings =  c("NA","","#NA"), sep=",")
 ```
 
-
+Creating a correlation matrix
+```{r fig.width=10, fig.height=10}
+library(corrplot)
+library(functional)
+# we can only Create a correlation matrix with only numeric data, therefore we are going to use sapply to only get numeric data
+# sapply is applying a fuction over list of vector
+numericData <- telecomData[sapply(telecomData,is.numeric)]
+matrix <- cor(numericData, use="pairwise.complete.obs")
+corrplot(matrix, type = "lower", method = "circle", order="hclust", tl.srt = 45, tl.cex = 0.7)
+```
 ## Missing Data
 
 ## Insights from Data explorations
