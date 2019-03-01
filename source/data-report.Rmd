@@ -19,9 +19,7 @@ library(sqldf)
 ```
 
 ## Abstract
-Nowadays, telecom industry faces fierce com-petition in satisfying its customers. The role of churn prediction system is not only restricted to accurately predict churners but also to interpret customer churn behavior.
-TBD: What is churn behaviour
-
+Nowadays, telecom industry faces fierce competition in satisfying its customers. When a business loses customers, its profit and growth rate may be negatively affected. The churn rate of a company is percentage od subscribers to a service who discontinue thier subscritions within a given time period. We will try to create a sytem will group customers by thier traits so indiviudal nee
 ## Background 
 TBD
 
@@ -40,27 +38,12 @@ Datat set is comprised of database of contributions made at both the federal lev
 
 Column Name            | Column Description  
 -----------------------| ------------------- 
-age                    | Age of the customer
-job                    | Customer's Occupation*
-marital                | Marital status of the customer* 
-education              | Education level of the customer*
-default                | Has credit in default (yes/no)
-balance                | ??
-housing                | has housing loan (yes/no)
-loan                   | has personal loan (yes/no)  
-contract               | contact communication type (categorical: 'cellular','telephone') 
-day                    | ??
-month                  | month the customer was contrained previously in the year
-duration               |  last contact duration, in seconds (numeric). Important note: this attribute highly affects the output target (e.g., if duration=0 then                             y='no'). Yet, the duration is not known before a call is performed. Also, after the end of the call y is obviously 
-campaign               |  number of contacts performed during this campaign and for this client (numeric, includes last contact)
-pdays                  | number of days that passed by after the client was last contacted from a previous campaign (numeric; 999 means client was not previously                           contacted)
-previous               | number of contacts performed before this campaign and for this client
-poutcome               | outcome of the previous marketing campaign
-y                      | has the client subscribed a term deposit? (binary: 'yes','no')
+
 
 ## Data Exploartion
 ```{r}
 telecomData = read.csv("../data/cell2celltrain.csv", header = TRUE, na.strings =  c("NA","","#NA"), sep=",")
+summary(telecomData)
 ```
 
 Creating a correlation matrix
