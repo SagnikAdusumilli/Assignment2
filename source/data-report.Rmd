@@ -109,19 +109,19 @@ telecomData = read.csv("../data/cell2celltrain.csv", header = TRUE, na.strings =
 
 ```
 ## Data Exploartion
-```{r, message=FALSE}
+Summary:
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 summary(telecomData)
+
+```
+Structure:
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 str(telecomData)
-ncol(telecomData) 
-nrow(telecomData) 
 
 ```
 
-
 Creating a correlation matrix
-```{r fig.width=10, fig.height=10}
-library(corrplot)
-#library(functional)
+```{r fig.width=10, fig.height=10, echo = FALSE, warning = FALSE, message = FALSE}
 # we can only Create a correlation matrix with only numeric data, therefore we are going to use sapply to only get numeric data
 # sapply is applying a fuction over list of vector
 numericData <- telecomData[sapply(telecomData,is.numeric)]
@@ -130,7 +130,7 @@ corrplot(matrix, type = "lower", method = "circle", order="hclust", tl.srt = 45,
 ```
 
 ## Missing Data
-```{r}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 #lets check missing values
 
 sort(colSums(is.na(telecomData)), decreasing = T)
@@ -139,17 +139,19 @@ sort(colSums(is.na(telecomData)), decreasing = T)
 #filter(df, Total.Amount > 1000) #filter
 
 ```
-Columns with NA: MonthlyRevenue, MonthlyMinutes, TotalRecurringCharge, DirectorAssistedCalls, OverageMinutes, RoamingCalls, PercChangeMinutes, PercChangeRevenues, Handsets, HandsetModels, CurrentEquipmentDays, AgeHH1, AgeHH2.
+Columns with NA: 
+MonthlyRevenue, MonthlyMinutes, TotalRecurringCharge, DirectorAssistedCalls, OverageMinutes, RoamingCalls, PercChangeMinutes, PercChangeRevenues, Handsets, HandsetModels, CurrentEquipmentDays, AgeHH1, AgeHH2.
+
 The maximum number of records with NA columns is 909 for columns AgeHH1 and AgeHH2. We are going to eliminate these rows with NA values.
 
-```{r}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 #We can skip all the data with missing values:
 telecomData <- na.omit(telecomData)
 ```
 After running the na.omit command, number of rows was 51,047 and now it is 49,752 rows.
 
 Convert factor columns to numeric in order to do the clustering.
-```{r}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 # Convert Factor columns to numeric columns
 for (i in colnames(telecomData)){
   if (is.factor(telecomData[,c(i)])){
@@ -161,13 +163,13 @@ remove(i)
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, results='asis'}
-options(xtable.floating = TRUE)
-options(xtable.timestamp = "")
-options(xtable.comment = FALSE)
+#options(xtable.floating = TRUE)
+#options(xtable.timestamp = "")
+#options(xtable.comment = FALSE)
 
 #summary(telecomData[,1:8])
-library(xtable)
-#print(xtable(summary(telecomData[,1:8])), include.rownames = FALSE, scalebox=.7)
+#library(xtable)
+#print(xtable(summary(telecomData[,1:8])), type="html", include.rownames = FALSE, scalebox=.7)
 #print(xtable(summary(telecomData[,9:16])), include.rownames = FALSE, scalebox=.7)
 #print(xtable(summary(telecomData[,17:23]), caption = "\\tt Weather Obesrvations Data Summary", label = "data_head"), include.rownames = FALSE, scalebox=.7)
 ```
@@ -185,30 +187,51 @@ library(RColorBrewer) # color palettes
 # pick palettes 
 mainPalette = brewer.pal(8,"Dark2")
 
-p1 = tmp %>% ggplot(aes(x=Churn  )) + geom_density(fill=mainPalette[1], colour=mainPalette[1], alpha = 0.2)
+p1 = tmp %>% ggplot(aes(x=DirectorAssistedCalls  )) + geom_density(fill=mainPalette[1], colour=mainPalette[1], alpha = 0.2) + scale_x_log10()
 
-p2 = tmp %>% ggplot(aes(x=DroppedCalls  )) + geom_density(fill=mainPalette[2], colour=mainPalette[2], alpha = 0.2)
+p2 = tmp %>% ggplot(aes(x=RoamingCalls  )) + geom_density(fill=mainPalette[2], colour=mainPalette[2], alpha = 0.2) + scale_x_log10()
 
-p3 = tmp %>% ggplot(aes(x=RoamingCalls  )) + geom_density(fill=mainPalette[3], colour=mainPalette[3], alpha = 0.2)
+p3 = tmp %>% ggplot(aes(x=DroppedCalls  )) + geom_density(fill=mainPalette[3], colour=mainPalette[3], alpha = 0.2) + scale_x_log10()
 
-p4 = tmp %>% ggplot(aes(x=UnansweredCalls  )) + geom_density(fill=mainPalette[4], colour=mainPalette[4], alpha = 0.2)
+p4 = tmp %>% ggplot(aes(x=BlockedCalls  )) + geom_density(fill=mainPalette[4], colour=mainPalette[4], alpha = 0.2) + scale_x_log10()
 
-p5 = tmp %>% ggplot(aes(x=CustomerCareCalls  )) + geom_density(fill=mainPalette[5], colour=mainPalette[5], alpha = 0.2)
+p5 = tmp %>% ggplot(aes(x=UnansweredCalls  )) + geom_density(fill=mainPalette[5], colour=mainPalette[5], alpha = 0.2) + scale_x_log10()
 
-p6 = tmp %>% ggplot(aes(x=ThreewayCalls  )) + geom_density(fill=mainPalette[6], colour=mainPalette[6], alpha = 0.2)
+p6 = tmp %>% ggplot(aes(x=CustomerCareCalls  )) + geom_density(fill=mainPalette[6], colour=mainPalette[6], alpha = 0.2) + scale_x_log10()
 
-p7 = tmp %>% ggplot(aes(x=ReceivedCalls  )) + geom_density(fill=mainPalette[7], colour=mainPalette[7], alpha = 0.2) + scale_x_log10()
+p7 = tmp %>% ggplot(aes(x=ThreewayCalls  )) + geom_density(fill=mainPalette[7], colour=mainPalette[7], alpha = 0.2) + scale_x_log10()
 
-p8 = tmp %>% ggplot(aes(x= CreditRating, colour = CreditRating, fill = CreditRating  )) +
-  geom_density(alpha = 0.2) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position="none")
+p8 = tmp %>% ggplot(aes(x=ReceivedCalls  )) + geom_density(fill=mainPalette[8], colour=mainPalette[8], alpha = 0.2) + scale_x_log10()
 
-p9 = tmp %>% ggplot(aes(x=MadeCallToRetentionTeam  )) + geom_bar(fill=mainPalette[8], colour=mainPalette[8], alpha = 0.5)
+p9 = tmp %>% ggplot(aes(x=OutboundCalls  )) + geom_density(fill=mainPalette[1], colour=mainPalette[1], alpha = 0.2) + scale_x_log10()
+
+p10 = tmp %>% ggplot(aes(x=InboundCalls  )) + geom_density(fill=mainPalette[2], colour=mainPalette[2], alpha = 0.2) + scale_x_log10()
+
+p11 = tmp %>% ggplot(aes(x=PeakCallsInOut  )) + geom_density(fill=mainPalette[3], colour=mainPalette[3], alpha = 0.2) + scale_x_log10()
+
+p12 = tmp %>% ggplot(aes(x=OffPeakCallsInOut  )) + geom_density(fill=mainPalette[4], colour=mainPalette[4], alpha = 0.2) + scale_x_log10()
+
+p13 = tmp %>% ggplot(aes(x=DroppedBlockedCalls  )) + geom_density(fill=mainPalette[5], colour=mainPalette[5], alpha = 0.2) + scale_x_log10()
+
+p14 = tmp %>% ggplot(aes(x=CallForwardingCalls  )) + geom_density(fill=mainPalette[6], colour=mainPalette[6], alpha = 0.2) + scale_x_log10()
+
+p15 = tmp %>% ggplot(aes(x=CallWaitingCalls  )) + geom_density(fill=mainPalette[7], colour=mainPalette[7], alpha = 0.2) + scale_x_log10()
+
+p16 = tmp %>% ggplot(aes(x=RetentionCalls  )) + geom_density(fill=mainPalette[8], colour=mainPalette[8], alpha = 0.2) + scale_x_log10()
+
+#p7 = tmp %>% ggplot(aes(x=ThreewayCalls  )) + geom_density(fill=mainPalette[7], colour=mainPalette[7], alpha = 0.2) + scale_x_log10()
+
+#p8 = tmp %>% ggplot(aes(x= CreditRating, colour = CreditRating, fill = CreditRating  )) +
+#  geom_density(alpha = 0.2) + theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.position="none")
+
+#p9 = tmp %>% ggplot(aes(x=MadeCallToRetentionTeam  )) + geom_bar(fill=mainPalette[8], colour=mainPalette[8], alpha = 0.5)
 
 library(gridExtra) # arrange grids
 
-grid.arrange(p1,p2,p3,p4,p5,p6,p7,p8,p9)
+grid.arrange(p1,p2,p3,p4,p5,p6,p7,p8)
+grid.arrange(p9,p10,p11,p12,p13,p14,p15,p16)
 
-rm(p1,p2,p3,p4,p5,p6,p7,p8,p9,tmp)
+rm(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,tmp)
 ```
 
 
@@ -223,7 +246,7 @@ rm(p1,p2,p3,p4,p5,p6,p7,p8,p9,tmp)
 
 ## Modeling
 
-```{r}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 telecomDataSmall <- telecomData[1:10000,]
 #scale the variables
 scaled_telecomDataSmall <- scale(telecomDataSmall)
@@ -231,36 +254,39 @@ scaled_telecomDataSmall <- scale(telecomDataSmall)
 #Hierarchical Clustering
 d <- dist(scaled_telecomDataSmall,method = "euclidean") #distance matrix
 h_clust <- hclust(d, method = "ward.D2") #clustering
-h_clust
+#h_clust
 plot(h_clust,labels = telecomDataSmall$CustomerID) #dendrogram
 
 #rect.hclust(h_clust,k=4)
 
 #extract clusters
 groups <- cutree(h_clust,k=4)
-groups
+#groups
 
 #pca
 pcmp <- princomp(scaled_telecomDataSmall)
-pred_pc <- predict(pcmp, newdata=scaled_telecomDataSmall)[,1:2]
-
+pred_pc <- predict(pcmp, newdata=scaled_telecomDataSmall)#[,1:2]
+#pred_pc
 comp_dt <- cbind(as.data.table(pred_pc),cluster = as.factor(groups), Labels = telecomDataSmall$CustomerID)
-comp_dt
-ggplot(comp_dt,aes(Comp.1,Comp.2))+
+#comp_dt
+ggplot(comp_dt,aes(Comp.1,Comp.58))+
   geom_point(aes(color = cluster),size=3)
 
 #kmeans
 kclust <- kmeans(scaled_telecomDataSmall,centers = 4,iter.max = 100)
-
-ggplot(comp_dt,aes(Comp.1,Comp.2))+
+kclust
+ggplot(comp_dt,aes(Comp.1,Comp.58))+
   geom_point(aes(color = as.factor(kclust$cluster)),size=3)
 
+#library(fpc)
 tunek <- kmeansruns(scaled_telecomDataSmall,krange = 1:5,criterion = "ch")
 tunek$bestk #3
-tunek
+tunek$crit
+#tunek
 tunekw <- kmeansruns(scaled_telecomDataSmall,krange = 1:3,criterion = "asw")
 tunekw$bestk #4
-tunekw
+tunek$size
+#tunekw
 ```
 
 
