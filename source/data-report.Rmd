@@ -253,11 +253,11 @@ scaled_telecomDataSmall <- scale(telecomDataSmall)
 
 #Hierarchical Clustering
 d <- dist(scaled_telecomDataSmall,method = "euclidean") #distance matrix
-h_clust <- hclust(d, method = "ward.D2") #clustering
+h_clust <- hclust(d, method = "ward") #clustering
 #h_clust
 plot(h_clust,labels = telecomDataSmall$CustomerID) #dendrogram
 
-#rect.hclust(h_clust,k=4)
+rect.hclust(h_clust,k=4)
 
 #extract clusters
 groups <- cutree(h_clust,k=4)
@@ -265,27 +265,27 @@ groups <- cutree(h_clust,k=4)
 
 #pca
 pcmp <- princomp(scaled_telecomDataSmall)
-pred_pc <- predict(pcmp, newdata=scaled_telecomDataSmall)#[,1:2]
+pred_pc <- predict(pcmp, newdata=scaled_telecomDataSmall)[,1:2]
 #pred_pc
 comp_dt <- cbind(as.data.table(pred_pc),cluster = as.factor(groups), Labels = telecomDataSmall$CustomerID)
 #comp_dt
-ggplot(comp_dt,aes(Comp.1,Comp.58))+
-  geom_point(aes(color = cluster),size=3)
+ggplot(comp_dt,aes(Comp.1,Comp.2))+
+  geom_point(aes(color = cluster),size=3) #+xlab('x')+ylab('density')
 
 #kmeans
 kclust <- kmeans(scaled_telecomDataSmall,centers = 4,iter.max = 100)
-kclust
-ggplot(comp_dt,aes(Comp.1,Comp.58))+
+#kclust
+ggplot(comp_dt,aes(Comp.1,Comp.2))+
   geom_point(aes(color = as.factor(kclust$cluster)),size=3)
 
-#library(fpc)
+library(fpc)
 tunek <- kmeansruns(scaled_telecomDataSmall,krange = 1:5,criterion = "ch")
 tunek$bestk #3
-tunek$crit
+#tunek$crit
 #tunek
 tunekw <- kmeansruns(scaled_telecomDataSmall,krange = 1:3,criterion = "asw")
 tunekw$bestk #4
-tunek$size
+#tunek$size
 #tunekw
 ```
 
