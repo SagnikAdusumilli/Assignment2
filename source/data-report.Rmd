@@ -6,82 +6,77 @@ output: word_document
 ## Authors 
 Ali El-Sharif, Neha Panchal, Sagnik Adusumilli, Sarmad Shubber
 
-## Abstract
- Nowadays, the telecom industry faces fierce competition in satisfying its customers. When a business loses customers, its profit and growth rate may be negatively affected. The churn rate of a company is percentage of subscribers to a service who discontinue their subscriptions within a given time period. We will try to create a system will group customers by their traits so individual needs.
-
-## Background 
-TBD
+## Background
+ Nowadays, the telecom industry faces fierce competition in satisfying its customers. When a business loses customers, its profit and growth rate may be negatively affected. The churn rate of a company is percentage of subscribers to a service who discontinue their subscriptions within a given time period. 
 
 ## Objective
-TBD
+We will create a system that groups customers by their traits to better serve their individual needs.
 
 ## Data Analysis
 The data has been sourced from Kaggle https://www.kaggle.com/jpacse/datasets-for-churn-telecom
 The dataset is preprocessed and a balanced consisting of 71,047 instances and 58 attributes.
 
 ## Data Dictionary
-Datat set is comprised of database of contributions made at both the federal level and in 13 provinces and territories.
-
 Column Name               | Column Description  
 --------------------------| ------------------- 
-CustomerID	              | DESCRIPTION
-Churn	                    | DESCRIPTION
-MonthlyRevenue	          | DESCRIPTION
-MonthlyMinutes	          | DESCRIPTION
-TotalRecurringCharge      | DESCRIPTION
-DirectorAssistedCalls     | DESCRIPTION
-OverageMinutes	          | DESCRIPTION
-RoamingCalls	            | DESCRIPTION
-PercChangeMinutes	        | DESCRIPTION
-PercChangeRevenues        | DESCRIPTION  
-DroppedCalls	            | DESCRIPTION
-BlockedCalls	            | DESCRIPTION
-UnansweredCalls	          | DESCRIPTION
-CustomerCareCalls	        | DESCRIPTION
-ThreewayCalls	            | DESCRIPTION
-ReceivedCalls	            | DESCRIPTION
-OutboundCalls	            | DESCRIPTION
-InboundCalls	            | DESCRIPTION
-PeakCallsInOut	          | DESCRIPTION
-OffPeakCallsInOut	        | DESCRIPTION  
-DroppedBlockedCalls	      | DESCRIPTION
-CallForwardingCalls	      | DESCRIPTION
-CallWaitingCalls	        | DESCRIPTION
-MonthsInService	          | DESCRIPTION
-UniqueSubs	              | DESCRIPTION
-ActiveSubs	              | DESCRIPTION
-ServiceArea	              | DESCRIPTION
-Handsets	                | DESCRIPTION
-HandsetModels	            | DESCRIPTION
-CurrentEquipmentDays      | DESCRIPTION
-AgeHH1	                  | DESCRIPTION
-AgeHH2	                  | DESCRIPTION
-ChildrenInHH	            | DESCRIPTION
-HandsetRefurbished	      | DESCRIPTION
-HandsetWebCapable	        | DESCRIPTION
-TruckOwner	              | DESCRIPTION
-RVOwner	                  | DESCRIPTION
-Homeownership	            | DESCRIPTION
-BuysViaMailOrder	        | DESCRIPTION
-RespondsToMailOffers  	  | DESCRIPTION 
-OptOutMailings	          | DESCRIPTION
-NonUSTravel	              | DESCRIPTION
-OwnsComputer	            | DESCRIPTION
-HasCreditCard	            | DESCRIPTION
-RetentionCalls	          | DESCRIPTION
-RetentionOffersAccepted   | DESCRIPTION	
-NewCellphoneUser	        | DESCRIPTION	
-NotNewCellphoneUser	      | DESCRIPTION	
-ReferralsMadeBySubscriber	| DESCRIPTION	
-IncomeGroup	              | DESCRIPTION	
-OwnsMotorcycle	          | DESCRIPTION	
-AdjustmentsToCreditRating	| DESCRIPTION	
-HandsetPrice	            | DESCRIPTION	
-MadeCallToRetentionTeam	  | DESCRIPTION	
-CreditRating	            | DESCRIPTION	
-PrizmCode	                | DESCRIPTION	
-Occupation	              | DESCRIPTION	
-MaritalStatus             | DESCRIPTION	
+CustomerID	              | Unique customer ID
+Churn	                    | Customer cut ties with service during a given time period (Yes/No)
+MonthlyRevenue	          | Monthly revenue
+MonthlyMinutes	          | Mean monthly minute of use
+TotalRecurringCharge      | Mean total recurring charge
+DirectorAssistedCalls     | Mean number of director assisted calls
+OverageMinutes	          | Mean overage minute of use
+RoamingCalls	            | Number of call were made and received outside of home area network operator
+PercChangeMinutes	        | % change in minute of use
+PercChangeRevenues        | % change in revenues
+DroppedCalls	            | Number of telephone calls which, due to technical reasons were cut off
+BlockedCalls	            | Number of incoming subscriber's blocked calls from specific telephone numbers
+UnansweredCalls	          | Number of calls which are not picked up by an agent
+CustomerCareCalls	        | Number of calls made by customer care to the subscriber.
+ThreewayCalls	            | Number of conference call with two other two callers with local numbers
+ReceivedCalls	            | Number of incoming calls that were answered
+OutboundCalls	            | Number of  call initiated by a call center agent to a customer
+InboundCalls	            | Number of call initiated by a  customer to call center agent
+PeakCallsInOut	          | Mean of peak in and out voice calls
+OffPeakCallsInOut	        | Mean number of in and out off peak voice calls
+DroppedBlockedCalls	      | Mean number of dropped blocked calls
+CallForwardingCalls	      | Number of redirected calls to another available telephone numbers
+CallWaitingCalls	        | Number of suspended calls already in progress to accept a second call
+MonthsInService	          | Months in Service
+UniqueSubs	              | Number of unique subs
+ActiveSubs	              | Number of active subs
+ServiceArea	              | Area covered by the signal of a broadcasting station
+Handsets	                | Outer part of mobile phone that does not include the battery or the sim card
+HandsetModels	            | Models of mobile phones
+CurrentEquipmentDays      | Number of days of the current equipment
+AgeHH1	                  | Age of first HH member
+AgeHH2	                  | Age of second HH member
+ChildrenInHH	            | Presence of children in HH (Yes/No)
+HandsetRefurbished	      | Pre-owned handset sent back due to a fault and has been repaired for re-sale (Yes/No)
+HandsetWebCapable	        | Handset is web capable (Yes/No)
+TruckOwner	              | Subscriber owns a Truck (Yes/No)
+RVOwner	                  | Subscriber owns a recreational vehicle (Yes/No)
+Homeownership	            | Subscriber owns a home (Yes/No)
+BuysViaMailOrder	        | Buys via mail order (Yes/No)
+RespondsToMailOffers  	  | Number of time Subscriber responds to a mail offers (Yes/No)
+OptOutMailings	          | Chosen by not to be solicited by Mails (Yes/No)
+NonUSTravel	              | Rravelled to non-US country (Yes/No)
+OwnsComputer	            | Owns a personal computer (Yes/No)
+HasCreditCard	            | Has a credit card (Yes/No)
+RetentionCalls	          | Customer  made call to retention team
+RetentionOffersAccepted   | Number of previous retention offers accepted
+NewCellphoneUser	        | Known to be a new cell phone user	(Yes/No)
+NotNewCellphoneUser	      | Known not to be a new cell phone user (Yes/No)
+ReferralsMadeBySubscriber	| Number of referals made by subscriber
+IncomeGroup	              | Subscriber income group
+OwnsMotorcycle	          | Subscriber owns a	motor cycle (Yes/No)
+AdjustmentsToCreditRating	| Number of adjustments were made to customer's credit rating (Up or Down)
+HandsetPrice	            | Price of outer part of mobile phone not including  battery or sim card
+MadeCallToRetentionTeam	  | Number of calls were made to retention team	(Yes/No)
+CreditRating	            | Credit Rating
+PrizmCode	                | PRIZM (Potential Rating Index for Zip Market) - census data market segmentation
+Occupation	              | Occupation
+MaritalStatus             | Marital status
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -240,6 +235,22 @@ rm(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,tmp)
 
 ## Data Preparation
 
+# create normalization function and apply to the data
+normalize <-function(x){
+  return ((x-min(x))/(max(x)-min(x)))
+}
+telecomData_n <- as.data.frame(lapply(telecomData,normalize))
+
+# apply R's z-score standarization function to the data
+telecomData_z <-as.data.frame(lapply(telecomData,scale))
+
+# create and apply threshold function
+threshold <- function(x,c) {
+  return (ifelse(x > c,1,0))
+}
+threshold_b <- as.data.frame(lapply(telecomData, threshold, c=1))
+
+
 ## Data Imputing
 
 ## Feature Selection
@@ -288,9 +299,3 @@ tunekw$bestk #4
 #tunek$size
 #tunekw
 ```
-
-
-You can also embed plots, for example:
-
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
