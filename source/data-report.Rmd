@@ -207,29 +207,7 @@ grid.arrange(p9,p10,p11,p12,p13,p14,p15,p16)
 rm(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,tmp)
 ```
 
-
-
-## Insights from Data explorations
-
-## Data Preparation
-
-# create normalization function and apply to the data
-normalize <-function(x){
-  return ((x-min(x))/(max(x)-min(x)))
-}
-telecomData_n <- as.data.frame(lapply(telecomData,normalize))
-
-# apply R's z-score standarization function to the data
-telecomData_z <-as.data.frame(lapply(telecomData,scale))
-
-# create and apply threshold function
-threshold <- function(x,c) {
-  return (ifelse(x > c,1,0))
-}
-threshold_b <- as.data.frame(lapply(telecomData, threshold, c=1))
-
-
-## Modeling
+## Modeling And Data Prep
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
 telecomDataSmall <- telecomData[1:10000,]
@@ -295,7 +273,10 @@ ggplot(comp_dt,aes(Comp.1,Comp.2))+
 
 
 #kmeans
+scaled_telecomDataSmallNumeric <- scaled_telecomDataSmallNumeric[is.finite(rowSums(scaled_telecomDataSmallNumeric)),]
 kclust <- kmeans(scaled_telecomDataSmallNumeric,centers = 4,iter.max = 100)
+save(kclust, file="k_clust.rda")
+
 #kclust
 ggplot(comp_dt,aes(Comp.1,Comp.2))+
   geom_point(aes(color = as.factor(kclust$cluster)),size=3)
